@@ -1,0 +1,36 @@
+# The URL the site will be built for
+base_url = "https://jnzlab.io"
+
+title = "Jameel Ahmad"
+description = "Full-stack engineer (Next.js). AI & medical imaging research, open source, and LucidHire—portfolio and blog by Jameel Ahmad."
+default_language = "en"
+author = "Jameel Ahmad"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+generate_feeds = true
+feed_filenames = ["rss.xml"]
+taxonomies = [{ name = "tags", feed = true }]
+
+[markdown]
+external_links_target_blank = true
+external_links_no_follow = false
+external_links_no_referrer = false
+smart_punctuation = true
+insert_anchor_links = "heading"
+
+[markdown.highlighting]
+theme = "catppuccin-mocha"
+
+[extra]
+og_image = "/astropaper-og.jpg"
+post_per_index = 4
+post_per_page = 4
+show_back_button = true
+edit_post_url = "https://github.com/jnzlab/jameel/edit/main/"
+timezone = "Asia/Karachi"
+repo_profile = "https://github.com/jnzlab"

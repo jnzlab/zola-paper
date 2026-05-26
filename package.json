@@ -1,0 +1,15 @@
+{
+  "name": "zola-paper",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Zola migration of the AstroPaper Theme by Jameel Ahmad",
+  "scripts": {
+    "build": "node scripts/fetch-github-repos.mjs && node scripts/copy-pagefind-ui.mjs && zola build && pagefind --site public",
+    "pagefind": "pagefind --site public"
+  },
+  "devDependencies": {
+    "@pagefind/default-ui": "^1.5.2",
+    "pagefind": "^1.5.2"
+  }
+}

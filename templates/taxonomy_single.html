@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% import "macros.html" as m %}
+{% block title %}Tag: {{ term.name }} | {{ config.title }}{% endblock title %}
+{% block content %}<nav class="breadcrumb app-layout" aria-label="breadcrumb"><ul><li><a href="/">Home</a><span aria-hidden="true">&raquo;</span></li><li><a href="{{ get_url(path='tags') }}">Tags</a><span aria-hidden="true">&raquo;</span></li><li><span aria-current="page">{{ term.name }}</span></li></ul></nav><main id="main-content" class="app-layout page-main"><h1>Tag: <span>{{ term.name }}</span></h1><p class="page-desc">All the articles with the tag "{{ term.name }}".</p><ul>{% for p in term.pages %}{{ m::card(page=p) }}{% endfor %}</ul></main>{% endblock content %}

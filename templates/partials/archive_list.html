@@ -1,0 +1,38 @@
+{% import "macros.html" as m %}
+{% set posts = get_section(path="posts/_index.md") %}
+{% set_global open_year = "" %}
+{% set_global open_month = "" %}
+{% for p in posts.pages %}
+  {% set year = p.date | date(format="%Y", timezone=config.extra.timezone) %}
+  {% set month_name = p.date | date(format="%B", timezone=config.extra.timezone) %}
+  {% set month_key = p.date | date(format="%Y-%m", timezone=config.extra.timezone) %}
+  {% if year != open_year %}
+    {% if open_month != "" %}</ul></div>{% set_global open_month = "" %}{% endif %}
+    {% if open_year != "" %}</div>{% endif %}
+    {% set_global year_count = 0 %}
+    {% for post in posts.pages %}
+      {% if post.date | date(format="%Y", timezone=config.extra.timezone) == year %}
+        {% set_global year_count = year_count + 1 %}
+      {% endif %}
+    {% endfor %}
+    <div class="archive-year">
+      <span class="archive-year-title">{{ year }}</span><sup>{{ year_count }}</sup>
+    {% set_global open_year = year %}
+  {% endif %}
+  {% if month_key != open_month %}
+    {% if open_month != "" %}</ul></div>{% endif %}
+    {% set_global month_count = 0 %}
+    {% for post in posts.pages %}
+      {% if post.date | date(format="%Y-%m", timezone=config.extra.timezone) == month_key %}
+        {% set_global month_count = month_count + 1 %}
+      {% endif %}
+    {% endfor %}
+    <div class="archive-month">
+      <div class="archive-month-label"><span>{{ month_name }}</span><sup>{{ month_count }}</sup></div>
+      <ul>
+    {% set_global open_month = month_key %}
+  {% endif %}
+  {{ m::card(page=p) }}
+{% endfor %}
+{% if open_month != "" %}</ul></div>{% endif %}
+{% if open_year != "" %}</div>{% endif %}

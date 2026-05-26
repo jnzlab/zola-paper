@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% import "macros.html" as m %}
+{% block title %}Tags | {{ config.title }}{% endblock title %}
+{% block content %}<nav class="breadcrumb app-layout" aria-label="breadcrumb"><ul><li><a href="/">Home</a><span aria-hidden="true">&raquo;</span></li><li><span aria-current="page">Tags</span></li></ul></nav><main id="main-content" class="app-layout page-main"><h1>Tags</h1><p class="page-desc">All the tags used in posts.</p><ul class="tag-list">{% for term in terms %}{{ m::tag_link(name=term.name) }}{% endfor %}</ul></main>{% endblock content %}

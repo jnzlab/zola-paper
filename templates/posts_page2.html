@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% import "macros.html" as m %}
+{% block title %}Posts | {{ config.title }}{% endblock title %}
+{% block content %}
+{% set posts = get_section(path="posts/_index.md") %}
+{% set breadcrumb_page = 2 %}
+{% include "partials/breadcrumb.html" %}
+<main id="main-content" class="app-layout page-main" data-backurl="/posts/2/">
+  <h1>Posts</h1><p class="page-desc">All the articles I've posted.</p>
+  <ul>{% for p in posts.pages %}{% if loop.index > config.extra.post_per_page %}{{ m::card(page=p) }}{% endif %}{% endfor %}</ul>
+</main>
+<nav class="pagination" role="navigation" aria-label="Pagination Navigation"><a class="link-button" href="{{ get_url(path='posts') }}">{{ m::icon(name="arrow-left") }} Prev</a>2 / 2<span class="link-button disabled">Next {{ m::icon(name="arrow-right") }}</span></nav>
+{% endblock content %}

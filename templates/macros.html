@@ -1,0 +1,40 @@
+{% macro icon(name, class="") %}<span class="icon icon-{{ name }} {{ class }}" aria-hidden="true"></span>{% endmacro icon %}
+
+{% macro socials() %}
+<div class="socials">
+  <a class="link-button icon-link" href="https://github.com/jnzlab" title="Jameel Ahmad on GitHub">{{ self::icon(name="github") }}<span class="sr-only">Jameel Ahmad on GitHub</span></a>
+  <a class="link-button icon-link" href="https://x.com/jnzlab" title="Jameel Ahmad on X">{{ self::icon(name="brand-x") }}<span class="sr-only">Jameel Ahmad on X</span></a>
+  <a class="link-button icon-link" href="https://linkedin.com/in/jnzlab" title="Jameel Ahmad on LinkedIn">{{ self::icon(name="linkedin") }}<span class="sr-only">Jameel Ahmad on LinkedIn</span></a>
+  <a class="link-button icon-link" href="mailto:jameelahmad221b@gmail.com" title="Send an email to Jameel Ahmad">{{ self::icon(name="mail") }}<span class="sr-only">Send an email to Jameel Ahmad</span></a>
+</div>
+{% endmacro socials %}
+
+{% macro share_links() %}
+<div class="share-links">
+  <span class="italic">Share this post on:</span>
+  <div class="share-icons">
+    <a class="link-button icon-link" href="https://wa.me/?text={{ current_url | urlencode }}" title="Share this post via WhatsApp">{{ self::icon(name="whatsapp") }}<span class="sr-only">Share this post via WhatsApp</span></a>
+    <a class="link-button icon-link" href="https://www.facebook.com/sharer.php?u={{ current_url | urlencode }}" title="Share this post on Facebook">{{ self::icon(name="facebook") }}<span class="sr-only">Share this post on Facebook</span></a>
+    <a class="link-button icon-link" href="https://x.com/intent/post?url={{ current_url | urlencode }}" title="Share this post on X">{{ self::icon(name="brand-x") }}<span class="sr-only">Share this post on X</span></a>
+    <a class="link-button icon-link" href="https://t.me/share/url?url={{ current_url | urlencode }}" title="Share this post via Telegram">{{ self::icon(name="telegram") }}<span class="sr-only">Share this post via Telegram</span></a>
+    <a class="link-button icon-link" href="https://pinterest.com/pin/create/button/?url={{ current_url | urlencode }}" title="Share this post on Pinterest">{{ self::icon(name="pinterest") }}<span class="sr-only">Share this post on Pinterest</span></a>
+    <a class="link-button icon-link" href="mailto:?subject=See%20this%20post&body={{ current_url | urlencode }}" title="Share this post via email">{{ self::icon(name="mail") }}<span class="sr-only">Share this post via email</span></a>
+  </div>
+</div>
+{% endmacro share_links %}
+
+{% macro datetime(page, size="sm") %}
+<div class="datetime datetime-{{ size }}">{{ self::icon(name="calendar", class="calendar-icon") }}<time datetime="{{ page.date }}">{{ page.date | date(format="%d %b, %Y", timezone=config.extra.timezone) }}</time></div>
+{% endmacro datetime %}
+
+{% macro card(page, heading="h2") %}
+<li class="post-card">
+  <a class="post-card-title" href="{{ page.permalink | safe }}">{% if heading == "h3" %}<h3>{{ page.title }}</h3>{% else %}<h2>{{ page.title }}</h2>{% endif %}</a>
+  {{ self::datetime(page=page) }}
+  <p>{{ page.extra.description }}</p>
+</li>
+{% endmacro card %}
+
+{% macro tag_link(name, size="lg") %}
+<li><a class="tag tag-{{ size }}" href="{{ get_taxonomy_url(kind='tags', name=name) | safe }}">{{ self::icon(name="hash") }}{{ name }}</a></li>
+{% endmacro tag_link %}

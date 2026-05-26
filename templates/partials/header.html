@@ -1,0 +1,17 @@
+{% import "macros.html" as m %}
+<a id="skip-to-content" href="#main-content">Skip to content</a>
+<header class="site-header app-layout">
+  <div id="top-nav-wrap">
+    <a href="/" class="site-title">{{ config.title }}</a>
+    <nav id="nav-menu">
+      <button id="menu-btn" class="menu-btn" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items">{{ m::icon(name="x", class="close-icon hidden") }}{{ m::icon(name="menu-deep", class="menu-icon") }}</button>
+      <ul id="menu-items" class="hidden">
+        <li><a href="{{ get_url(path='posts') }}" data-nav-prefix="/posts"{% if current_url is defined and current_url is containing("/posts") %} class="active-nav"{% endif %}>Posts</a></li>
+        <li><a href="{{ get_url(path='about') }}" data-nav-prefix="/about"{% if current_url is defined and current_url is containing("/about") %} class="active-nav"{% endif %}>About</a></li>
+        <li><a class="link-button{% if current_url is defined and current_url is containing("/archives") %} active-nav{% endif %}" href="{{ get_url(path='archives') }}" data-nav-prefix="/archives" title="Archives" aria-label="archives">{{ m::icon(name="archive", class="desktop-icon") }}<span class="mobile-label">Archives</span></a></li>
+        <li class="half"><a class="link-button{% if current_url is defined and current_url is containing("/search") %} active-nav{% endif %}" href="{{ get_url(path='search') }}" data-nav-prefix="/search" title="Search" aria-label="search">{{ m::icon(name="search") }}<span class="sr-only">Search</span></a></li>
+        <li class="half"><button id="theme-btn" class="theme-btn" title="Toggles light & dark" aria-label="auto" aria-live="polite">{{ m::icon(name="moon", class="moon-icon") }}{{ m::icon(name="sun-high", class="sun-icon") }}</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>

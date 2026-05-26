@@ -1,0 +1,5 @@
+.env
+public/
+node_modules/
+static/pagefind-ui/
+data/github_repos.json

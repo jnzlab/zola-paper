@@ -1,0 +1,23 @@
+{% extends "base.html" %}{% import "macros.html" as m %}
+{% block content %}
+{% set posts = get_section(path="posts/_index.md") %}
+{% set_global recent_count = 0 %}{% for p in posts.pages %}{% if not p.extra.featured %}{% set_global recent_count = recent_count + 1 %}{% endif %}{% endfor %}
+<main id="main-content" data-layout="index" class="app-layout">
+  <section id="hero">
+    <h1>Hi there</h1>
+    <p>I am a full-stack engineer with <strong>2+ years</strong> of <strong>Next.js</strong> experience and a published paper on <strong>AI-driven medical imaging</strong> (Swin Transformer, 24 skin conditions). I build reliable systems end to end—backend, REST APIs, and performant UIs—and ship from design to deployment. I am currently building <strong>LucidHire</strong>, an AI-powered candidate screening platform.</p>
+    <p class="mt-2">For education, experience, projects, and open source, see the <a class="text-link" href="{{ get_url(path='about') }}">About</a> page. Below are recent posts; the site repo lives on <a class="text-link" href="https://github.com/jnzlab/jameel">GitHub</a>.</p>
+    <div class="social-row"><div>Social Links:</div>{{ m::socials() }}</div>
+  </section>
+  {% include "partials/github_repos.html" %}
+  <section id="featured" class="post-list-section {% if recent_count == 0 %}no-border{% endif %}">
+    <h2>Featured</h2>
+    <ul>{% for p in posts.pages %}{% if p.extra.featured %}{{ m::card(page=p, heading="h3") }}{% endif %}{% endfor %}</ul>
+  </section>
+  {% if recent_count > 0 %}<section id="recent-posts" class="post-list-section no-border">
+    <h2>Recent Posts</h2>
+    <ul>{% set_global count = 0 %}{% for p in posts.pages %}{% if not p.extra.featured and count < config.extra.post_per_index %}{% set_global count = count + 1 %}{{ m::card(page=p, heading="h3") }}{% endif %}{% endfor %}</ul>
+  </section>{% endif %}
+  <div class="all-posts"><a class="link-button" href="{{ get_url(path='posts') }}">All Posts {{ m::icon(name="arrow-right") }}</a></div>
+</main>
+{% endblock content %}

@@ -1,0 +1,12 @@
+<nav class="breadcrumb app-layout" aria-label="breadcrumb">
+  <ul>
+    <li><a href="/">Home</a><span aria-hidden="true">&raquo;</span></li>
+    {% if breadcrumb_page is defined %}
+    <li><span aria-current="page">Posts (page {{ breadcrumb_page }})</span></li>
+    {% elif page is defined %}
+    <li><span aria-current="page">{{ page.title }}</span></li>
+    {% elif section is defined %}
+    <li><span aria-current="page">{{ section.title }}</span></li>
+    {% endif %}
+  </ul>
+</nav>

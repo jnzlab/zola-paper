@@ -1,0 +1,38 @@
+{% set github_repos = load_data(path="data/github_repos.json", format="json") %}
+<section id="github-repos">
+  <h2>Highlighted on GitHub</h2>
+  {% if github_repos | length > 0 %}
+  <ul class="github-list">
+    {% for repo in github_repos %}
+    <li>
+      <div class="repo-head">
+        <a class="repo-name" href="{{ repo.html_url }}" target="_blank" rel="noopener noreferrer">{{ repo.name }}</a>
+        <span class="repo-full">{{ repo.full_name }}</span>
+        {% if repo.fork %}<span class="repo-fork">Fork</span>{% endif %}
+      </div>
+      {% if repo.language or repo.pushed_at_label %}
+      <div class="repo-meta">
+        {% if repo.language %}<span>{{ repo.language }}</span>{% endif %}
+        {% if repo.pushed_at_label %}<span>Updated {{ repo.pushed_at_label }}</span>{% endif %}
+      </div>
+      {% endif %}
+      {% if repo.description %}<p class="repo-desc">{{ repo.description }}</p>{% endif %}
+      {% if repo.topics | length > 0 %}
+      <ul class="repo-topics" aria-label="Topics">
+        {% for topic in repo.topics %}
+        <li><span>{{ topic }}</span></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% if repo.homepage %}
+      <p class="repo-homepage">
+        <a href="{{ repo.homepage }}" target="_blank" rel="noopener noreferrer">{{ repo.homepage }}</a>
+      </p>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="github-fallback">Repository details load from the GitHub API at build time. If nothing appears, check your token or repo names in <code>portfolio_github_repos.json</code>. <a class="text-link" href="{{ config.extra.repo_profile }}">View profile on GitHub</a>.</p>
+  {% endif %}
+</section>

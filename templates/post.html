@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% import "macros.html" as m %}
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock title %}
+{% block content %}
+<div class="app-layout back-wrap"><a id="back-button" class="link-button back-button" href="/">{{ m::icon(name="chevron-left") }}<span>Go back</span></a></div>
+<main id="main-content" class="app-layout post-main" data-pagefind-body>
+  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="post-meta">{{ m::datetime(page=page, size="lg") }}<span class="meta-sep">|</span><a class="edit-post" href="{{ config.extra.edit_post_url }}{{ page.extra.original_file_path }}" target="_blank" rel="noopener noreferrer">{{ m::icon(name="edit") }}<span>Edit page</span></a></div>
+  <article id="article" class="app-prose">{{ page.content | safe }}</article>
+  <hr>
+  <ul class="post-tags" data-pagefind-ignore>{% for tag in page.taxonomies.tags %}{{ m::tag_link(name=tag, size="sm") }}{% endfor %}</ul>
+  <button id="btt-btn" class="back-to-top">{{ m::icon(name="arrow-narrow-up") }} Back To Top</button>
+  {{ m::share_links() }}
+  <hr>
+  <div class="prev-next" data-pagefind-ignore>
+    {% if page.higher %}<a href="{{ page.higher.permalink }}" class="prev-post">{{ m::icon(name="chevron-left") }}<div><span>Previous Post</span><div>{{ page.higher.title }}</div></div></a>{% endif %}
+    {% if page.lower %}<a href="{{ page.lower.permalink }}" class="next-post"><div><span>Next Post</span><div>{{ page.lower.title }}</div></div>{{ m::icon(name="chevron-right") }}</a>{% endif %}
+  </div>
+</main>
+{% endblock content %}
