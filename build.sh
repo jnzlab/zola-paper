@@ -14,5 +14,9 @@ if [ ! -f config.toml ] && [ -f zola.toml ]; then
   ln -sf zola.toml config.toml
   trap 'rm -f config.toml' EXIT
 fi
-zola build "$@"
+BASE_URL_ARGS=()
+if [ -n "${ZOLA_BASE_URL:-}" ]; then
+  BASE_URL_ARGS=(-u "$ZOLA_BASE_URL")
+fi
+zola build "${BASE_URL_ARGS[@]}" "$@"
 npx pagefind --site public

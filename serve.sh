@@ -9,6 +9,6 @@ if [ -f .env ]; then
 fi
 node scripts/fetch-github-repos.mjs
 node scripts/copy-pagefind-ui.mjs
-zola build
-npx pagefind --site public
+export ZOLA_BASE_URL="${ZOLA_BASE_URL:-http://127.0.0.1:1111}"
+./build.sh
 exec zola serve "$@"

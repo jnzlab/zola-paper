@@ -71,6 +71,7 @@ This site is a **static** Zola build. Cloudflare Pages is a good fit.
 | `GITHUB_TOKEN` | GitHub PAT with `public_repo` (or `repo` for private repos). Used at build time for the highlighted repos section. Mark as **Encrypted**. |
 | `NODE_VERSION` | `20` (optional; Pages sets Node by default) |
 | `ZOLA_VERSION` | `0.19.2` (optional; used by `scripts/install-zola.sh`) |
+| `ZOLA_BASE_URL` | `https://zola-paper.pages.dev` — **required until custom domain is live.** Zola bakes this into CSS/JS/link URLs. Change to `https://jnzlab.io` once that domain is attached to the Pages project. |
 
 5. Save and deploy. Each push to the production branch rebuilds and publishes.
 
