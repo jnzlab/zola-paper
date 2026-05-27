@@ -9,5 +9,10 @@ if [ -f .env ]; then
 fi
 node scripts/fetch-github-repos.mjs
 node scripts/copy-pagefind-ui.mjs
+# Zola 0.19.x expects config.toml; newer versions use zola.toml
+if [ ! -f config.toml ] && [ -f zola.toml ]; then
+  ln -sf zola.toml config.toml
+  trap 'rm -f config.toml' EXIT
+fi
 zola build "$@"
 npx pagefind --site public

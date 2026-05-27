@@ -83,12 +83,25 @@ This site is a **static** Zola build. Cloudflare Pages is a good fit.
 After a local build:
 
 ```bash
-npm ci
-./build.sh
-npx wrangler pages deploy public --project-name=jnzlab
+npm install
+npm run deploy
 ```
 
-Install Wrangler once: `npm install -g wrangler` and run `wrangler login`.
+Or step by step:
+
+```bash
+npm ci
+./build.sh
+npx wrangler pages deploy public --project-name=zola-paper --branch=main
+```
+
+Wrangler is included as a dev dependency; run `npx wrangler login` once locally.
+
+### Connected repository
+
+This project is linked to [github.com/jnzlab/zola-paper](https://github.com/jnzlab/zola-paper). Pushes to `main` trigger a Cloudflare Pages build automatically. Preview deployments are created for other branches and pull requests.
+
+**Production URL:** [https://zola-paper.pages.dev](https://zola-paper.pages.dev)
 
 ### Build notes for Cloudflare
 
